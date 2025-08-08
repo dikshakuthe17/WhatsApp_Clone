@@ -17,7 +17,7 @@ export default function Sidebar({ onSelectChat }) {
                     className="p-4 hover:bg-gray-800 cursor-pointer border-b border-gray-800"
                     onClick={() => onSelectChat(chat._id.wa_id, chat._id.name)}
                 >
-                    <div className="font-bold">{chat._id.name}</div>
+                    <div className="font-bold">{chat._id.name || chat._id.wa_id}</div>
                     <div className="text-sm text-gray-400 truncate">{chat.lastMessage}</div>
                 </div>
             ))}

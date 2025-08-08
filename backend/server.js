@@ -13,6 +13,11 @@ app.use(cors());
 // Connect DB
 connectDB();
 
+// Test Route for root "/"
+app.get('/', (req, res) => {
+    res.send('Backend is running...');
+});
+
 // Routes
 app.use('/api', messageRoutes);
 

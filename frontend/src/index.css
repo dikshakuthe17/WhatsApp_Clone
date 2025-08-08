@@ -1,1 +1,17 @@
 @import "tailwindcss";
+.chat-contact {
+    display: flex;
+    flex-direction: column;  /* Stack items vertically */
+    align-items: flex-start; /* Align items to the left */
+    padding: 10px;
+}
+
+.contact-name {
+    font-weight: bold;
+    margin-bottom: 4px;  /* Add space between name and number */
+}
+
+.contact-number {
+    font-size: 0.9em;
+    color: #667781;  /* WhatsApp's secondary text color */
+}

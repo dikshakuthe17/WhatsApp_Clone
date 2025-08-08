@@ -2,23 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { getConversations } from '../services/api';
 
 export default function Sidebar({ onSelectChat }) {
-    const [conversations, setConversations] = useState([]);
+    const [chats, setChats] = useState([]);
+    
 
     useEffect(() => {
-        getConversations().then(res => setConversations(res.data));
+        getConversations()
+            .then(res => {
+                setChats(res.data);
+            })
+            .catch(err => {
+                console.error('Error fetching conversations:', err);
+            });
     }, []);
 
     return (
-        <div className="bg-gray-900 text-white h-full overflow-y-auto">
-            <div className="p-4 text-lg font-semibold border-b border-gray-700">Chats</div>
-            {conversations.map((chat, idx) => (
+        <div className="w-1/4 bg-gray-900 text-white overflow-y-auto border-r border-gray-700">
+            <div className="p-4 bg-[#202c33] border-b border-gray-700">
+                <h2 className="text-lg font-semibold">Chats</h2>
+            </div>
+            {chats.map(chat => (
                 <div
-                    key={idx}
-                    className="p-4 hover:bg-gray-800 cursor-pointer border-b border-gray-800"
-                    onClick={() => onSelectChat(chat._id.wa_id, chat._id.name)}
+                    key={chat._id}
+                    className="p-3 hover:bg-gray-800 cursor-pointer"
+                    onClick={() => onSelectChat(chat)}
                 >
-                    <div className="font-bold">{chat._id.name || chat._id.wa_id}</div>
-                    <div className="text-sm text-gray-400 truncate">{chat.lastMessage}</div>
+                    <h4 className="font-bold">{chat.name || chat._id}</h4>
+                    <p className="text-gray-400 text-sm truncate">{chat.lastMessage}</p>
                 </div>
             ))}
         </div>
